@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>prez</title>
+		<title>Getting an A with your SSL Certificate</title>
 
 		<meta name="description" content="test presentation">
 		<meta name="author" content="pivotalsquid">
@@ -41,21 +41,177 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>prez</h1>
-					<h3>page 1</h3>
+					<h1>Getting an A with your SSL Certificate</h1>
 				</section>
 
 				<section>
-					<h2>Hello There</h2>
+					<h2>So you have a site that you just added features like login, shopping cart, etc</h2>
+				</section>
+
+				<section>
+					<h2>and you come to the realization that</h2>
+				</section>
+
+				<section>
+					<h2>hey, I need to be secure</h2>
+				</section>
+
+				<section>
+					<h2>So you go out and buy an SSL certificate</h2>
+				</section>
+
+				<section>
+					<h2>and set about installing it on your server</h2>
+				</section>
+
+				<section>
+					<h2>You've been reading about all those nasty exploits every other month</h2>
+				</section>
+
+				<section>
+					<h2>POODLE</h2>
+				</section>
+
+				<section>
+					<h2>BEAST</h2>
+				</section>
+
+				<section>
+					<h2>CRIME</h2>
+				</section>
+
+				<section>
+					<h2>HEARTBLEED</h2>
+				</section>
+
+				<section>
+					<h2>RC4 Brute Force</h2>
+				</section>
+
+				<section>
+					<h2>After some research, you discover that HAproxy now supports SSL termination</h2>
+				</section>
+
+				<section>
+					<h2>so you install HAProxy</h2>
+				</section>
+
+				<section>
+					<h2>and give it this awesome config that you found at nsa.gov</h2>
+				</section>
+
+				<section>
 					<p>
-						page 2
+						<code>ssl-default-bind-ciphers EXP-RC2-CBC-MD5:EXP-RC4-MD5:DES-CBC-SHA:RC4-MD5</code><br/><br/>
+						<code>bind :443 ssl no-tlsv12 no-tlsv11 no-tlsv10 crt /path/nonprod.pem</code>
 					</p>
 				</section>
+
+				<section>
+					<h2>The most ubiquitous browser on the planet happily loads the site</h2>
+				</section>
+
+				<section>
+					<img data-src="images/ie8.png"/>
+				</section>
+
+				<section>
+					<h2>But some users are complaining</h2>
+				</section>
+
+				<section>
+					<img data-src="images/chrome_dead.png"/>
+				</section>
+
+				<section>
+					<h2>Google Chrome will not load the site</h2>
+				</section>
+
+				<section>
+					<h2>You notice that Chrome is saying that your connection is not encrypted</h2>
+				</section>
+
+				<section>
+					<h2>Not encrypted?</h2>
+				</section>
+
+				<section>
+					<h2>Let's test it</h2>
+				</section>
+
+				<section>
+					<h2>Qualys SSL Labs Server Test</h2>
+					<p>https://www.ssllabs.com/ssltest</p>
+				</section>
+
+				<section>
+					<img data-src="images/ssllabs_server_test.png">
+				</section>
+
+				<section>
+					<h2>How how does our config rate?</h2>
+				</section>
+
+				<section>
+					<img data-src="images/grade_f.png"/>
+				</section>
+
+				<section>
+					<h2>turns out that config is not so awesome</h2>
+				</section>
+
+				<section>
+					<h2>Protocol Support</h2>
+					<code>bind :443 ssl no-tlsv12 no-tlsv11 no-tlsv10 crt /path/nonprod.pem</code>
+				</section>
+
+				<section>
+					<h2>only use TLS 1.2</h2>
+					<code>bind :443 ssl no-sslv3 no-tlsv10 no-tlsv11 crt /path/nonprod.pem</code>
+				</section>
+
+				<section>
+					<img data-src="images/grade_c_100_cert_and_proto.png"/>
+				</section>
+
+				<section>
+					<h2>Ciphers</h2>
+					<code>ssl-default-bind-ciphers EXP-RC2-CBC-MD5:EXP-RC4-MD5:DES-CBC-SHA:RC4-MD5</code>
+				</section>
+
+				<section>
+					<h2>Using export grade encryption</h2>
+				</section>
+
+				<section>
+					<h2>Using RC4 cipher</h2>
+				</section>
+
+				<section>
+					<img data-src="images/chrome_cert_info_obsolete_rc4.png"/>
+				</section>
+
+				<section>
+					<h2>Replace Export and RC4 ciphers with DHE, AES</h2>
+					<code>EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256
+						:RSA+AES256:EECDH+3DES:RSA+3DES:!aNULL:!eNULL:!EXPORT
+						:!DES:!RC4:!3DES:!MD5:!PSK</code>
+				</section>
+
+				<section>
+					<img data-src="images/grade_a.png"/>
+				</section>
+
+				<section>
+					<img data-src="images/chrome_cert_info_modern.png"/>
+				</section>
+
 				<section style="text-align: left;">
-					<h1>THE END</h1>
 					<p>
-						what are you still doing here?
-						go home
+						you're still here?<br/>
+						it's over<br/>
+						go home<br/>
+						go
 					</p>
 				</section>
 
